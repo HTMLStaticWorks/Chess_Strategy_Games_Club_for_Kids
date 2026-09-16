@@ -1,0 +1,2 @@
+# Chess_Strategy_Games_Club_for_Kids
+Automated website repository for Chess_Strategy_Games_Club_for_Kids
