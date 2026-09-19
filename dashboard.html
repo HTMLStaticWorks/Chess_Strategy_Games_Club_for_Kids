@@ -24,6 +24,14 @@
             flex-direction: column;
             z-index: 1000 !important;
             padding-top: 0 !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+        .dashboard-sidebar::-webkit-scrollbar,
+        .dashboard-nav-wrapper::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
         .dashboard-sidebar-brand {
             height: 72px !important;
@@ -42,6 +50,8 @@
         .dashboard-nav-wrapper {
             flex-grow: 1;
             overflow-y: auto;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
         }
         .dashboard-main-area {
             flex: 1;
@@ -67,6 +77,28 @@
             padding: 0 32px 32px 32px !important;
             padding-top: 72px !important;
             min-height: 100vh !important;
+        }
+        .session-card {
+            box-sizing: border-box !important;
+            width: 100% !important;
+            min-height: 130px !important;
+            height: 100% !important;
+            padding: 20px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            border-radius: 12px !important;
+        }
+        @media (min-width: 600px) and (max-width: 1024px) {
+            .upcoming-sessions-container {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+            }
+            .session-card {
+                min-height: 135px !important;
+                height: 100% !important;
+            }
         }
         .dashboard-section h2 {
             margin-top: 0 !important;
@@ -421,22 +453,22 @@
                     <div>
                         <div class="card" style="padding: 32px; height: 100%;">
                             <h3 style="margin-bottom: 24px;">Upcoming Approved Sessions</h3>
-                            <div style="display: flex; flex-direction: column; gap: 16px;">
-                                <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; border-left: 4px solid var(--primary-accent);">
+                            <div class="upcoming-sessions-container" style="display: flex; flex-direction: column; gap: 16px;">
+                                <div class="session-card" style="border: 1px solid var(--border-color); border-left: 4px solid var(--primary-accent);">
                                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                        <h4 style="font-size: 16px;">Saturday Blitz &amp; Open Arena</h4>
+                                        <h4 style="font-size: 16px; margin: 0;">Saturday Blitz &amp; Open Arena</h4>
                                         <span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">Enrolled</span>
                                     </div>
                                     <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Tomorrow &bull; 2:00 PM - 4:30 PM</p>
-                                    <p style="color: var(--text-primary); font-size: 14px;">Instructor: Sofia Martinez, WIM</p>
+                                    <p style="color: var(--text-primary); font-size: 14px; margin: 0;">Instructor: Sofia Martinez, WIM</p>
                                 </div>
-                                <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; border-left: 4px solid var(--highlight-accent);">
+                                <div class="session-card" style="border: 1px solid var(--border-color); border-left: 4px solid var(--highlight-accent);">
                                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                        <h4 style="font-size: 16px;">USCF Scholastic GrandPrix Cup</h4>
+                                        <h4 style="font-size: 16px; margin: 0;">USCF Scholastic GrandPrix Cup</h4>
                                         <span style="background: rgba(212, 163, 115, 0.15); color: var(--support-accent); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">Confirmed</span>
                                     </div>
                                     <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Saturday, Jun 20 &bull; 10:00 AM - 2:00 PM</p>
-                                    <p style="color: var(--text-primary); font-size: 14px;">Director: GM Alexander Petrov</p>
+                                    <p style="color: var(--text-primary); font-size: 14px; margin: 0;">Director: GM Alexander Petrov</p>
                                 </div>
                             </div>
                         </div>
@@ -449,7 +481,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
                     <h2 style="margin: 0;">Child's Match &amp; Tactic Logs</h2>
                     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                        <input type="month" class="form-control" style="width: auto; height: 40px;">
+                        <input type="month" class="form-control" value="2026-06" style="width: auto; height: 40px; min-width: 160px;">
                         <button class="btn btn-secondary" style="height: 40px; padding: 0 16px; display: flex; align-items: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Export Report</button>
                     </div>
                 </div>

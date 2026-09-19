@@ -3,7 +3,7 @@
     --secondary-bg: #281B14;
     --card-bg: #281B14;
     --text-primary: #FDFBF7;
-    --text-secondary: #D4A373;
+    --text-secondary: #E6D2B5;
     --border-color: #422D22;
     
     --primary-accent: #D4A373;
@@ -73,5 +73,53 @@
 
 /* Images opacity slightly lowered in dark mode to reduce glare */
 [data-theme="dark"] img {
+    opacity: 0.92;
+}
+
+/* Footer text consistency in dark mode */
+[data-theme="dark"] .footer {
+    background-color: var(--secondary-bg);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer-widget h4 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer-links a {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .footer-links a:hover {
+    color: #FFFFFF;
+}
+
+[data-theme="dark"] .footer-bottom {
+    color: var(--text-secondary);
+    border-top-color: var(--border-color);
+}
+
+/* Dashboard Sidebar Active Section Highlight in Dark Mode */
+[data-theme="dark"] .dashboard-nav li a.active,
+[data-theme="dark"] .dashboard-nav li a:hover {
+    background-color: #3D271D !important;
+    color: #FFFFFF !important;
+    border-left-color: var(--primary-accent) !important;
+    box-shadow: inset 4px 0 0 var(--primary-accent);
+}
+
+/* Form Controls & Date/Time/Month Picker Icons Contrast in Dark Mode */
+[data-theme="dark"] .form-control {
+    background-color: #1C130E;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator,
+[data-theme="dark"] input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.85) sepia(0.2) saturate(2);
+    cursor: pointer;
     opacity: 0.9;
 }
+

@@ -1453,12 +1453,15 @@ section.premium-section:not(.bg-secondary):nth-of-type(5) {
 .footer-links a {
     color: var(--text-secondary);
     text-decoration: none;
-    transition: var(--transition);
+    transition: all 0.25s ease-in-out;
+    display: inline-block;
 }
 
 .footer-links a:hover {
     color: var(--primary-accent);
+    transform: translateX(6px);
 }
+
 
 /* Table */
 .table-responsive {
@@ -1644,38 +1647,54 @@ th {
 
 /* ============================================================
    MOBILE (<= 360px) HERO IMAGE LAYOUT
-   The image is lifted out of absolute positioning so it
-   renders as a normal block element below the text/CTAs.
+/* ============================================================
+   MOBILE (<= 768px, including 368px) HERO SEPARATE IMAGE LAYOUT
+   The image is rendered as a normal separate block element
+   directly after/below the hero text contents & CTA buttons.
    ============================================================ */
-@media (max-width: 360px) {
+@media (max-width: 768px) {
     .hero-premium {
         min-height: auto;
-        padding-bottom: 32px;
+        padding-top: 100px;
+        padding-bottom: 40px;
     }
 
     .hero-premium-grid {
-        gap: 24px;
+        gap: 28px;
         padding-top: 12px;
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* Visual container — becomes a fixed-height block */
-    .hero-premium-visual {
+    /* Hero text content comes first */
+    .hero-premium-content {
+        order: 1;
         width: 100%;
-        max-width: 100%;
-        height: 240px;
-        perspective: none;
+        text-align: center;
+    }
+
+    /* Visual container — becomes a dedicated separate block element below text */
+    .hero-premium-visual {
+        order: 2;
+        display: flex !important;
+        width: 100% !important;
+        max-width: 540px !important;
+        height: auto !important;
+        margin-top: 12px;
+        perspective: none !important;
+        position: relative !important;
     }
 
     /* Image card — switch from absolute to relative so it
-       renders in document flow, directly below the buttons */
+       renders in document flow directly below text/buttons */
     .hero-image-card {
         position: relative !important;
         inset: auto !important;
         width: 100% !important;
-        height: 240px !important;
+        height: 260px !important;
         border-radius: 20px;
         transform: none !important;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
     }
 
     /* Ensure the img inside fills the card */
@@ -1686,34 +1705,31 @@ th {
         border-radius: 20px;
     }
 
-    /* Stack buttons vertically and full-width */
-    .hero-premium-actions {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
+    /* Hide background image on section for mobile so the image card stands out separately */
+    .hero-has-bg {
+        background-image: none !important;
     }
 
-    .hero-premium-actions .btn {
-        width: 100% !important;
-        margin: 0 !important;
-    }
-
-    /* Hide floating stat badges on tiny screens */
-    .floating-stat-card {
+    .hero-has-bg .hero-bg-overlay {
         display: none !important;
     }
 
-    /* Also hide the glass-panel-bg background decor */
+    /* Hide floating stat badges on mobile screens */
+    .floating-stat-card,
     .glass-panel-bg {
         display: none !important;
     }
 }
 
+@media (max-width: 480px) {
+    .hero-image-card {
+        height: 220px !important;
+    }
+}
+
 /* ============================================================
-   Hero with full-screen background image (768px / 1024px / 1440px)
-   At ≥361px: image is the section background with overlay.
-   At ≤360px: section bg removed; image shows as a separate
-              <img> block below the buttons (handled above).
+   Hero with full-screen background image (≥769px Desktop)
+   At ≥769px: section uses desktop hero background & split layout.
    ============================================================ */
 
 .hero-has-bg {
@@ -1722,7 +1738,7 @@ th {
     background-repeat: no-repeat;
 }
 
-/* Dark overlay — hidden by default, shown at ≥361px */
+/* Dark overlay for desktop */
 .hero-bg-overlay {
     display: none;
     position: absolute;
@@ -1732,8 +1748,8 @@ th {
     pointer-events: none;
 }
 
-/* ≥361px: Activate full-screen background mode */
-@media (min-width: 361px) {
+/* ≥769px: Activate full-screen background mode on desktop */
+@media (min-width: 769px) {
 
     /* Show the overlay */
     .hero-has-bg .hero-bg-overlay {
@@ -1745,7 +1761,7 @@ th {
         display: none;
     }
 
-    /* Hide the img block — image is now the section background */
+    /* Hide the separate img block on full-bg desktop layout */
     .hero-has-bg .hero-premium-visual {
         display: none !important;
     }
@@ -1786,17 +1802,6 @@ th {
         background: var(--primary-accent) !important;
         color: #FFFFFF !important;
         border-color: var(--primary-accent) !important;
-    }
-}
-
-/* ≤360px: Remove background-image entirely, let the <img> block show */
-@media (max-width: 360px) {
-    .hero-has-bg {
-        background-image: none !important;
-    }
-
-    .hero-has-bg .hero-bg-overlay {
-        display: none !important;
     }
 }
 
@@ -2259,21 +2264,21 @@ th {
     }
 }
 
-/* At >= 361px: image is section background; separate visual block is hidden */
-@media (min-width: 361px) {
+/* At >= 769px: image is section background on desktop; separate visual block is hidden */
+@media (min-width: 769px) {
     .page-hero-visual {
         display: none !important;
     }
 }
 
-/* At <= 360px: remove section background image/overlay and show separate image block below content */
-@media (max-width: 360px) {
+/* At <= 768px (including 368px): remove section background image/overlay and show separate image block below text content */
+@media (max-width: 768px) {
     .page-hero {
         margin-top: 88px;
         background-image: none !important;
         background-color: var(--primary-bg);
-        padding-top: 24px;
-        padding-bottom: 32px;
+        padding-top: 36px;
+        padding-bottom: 40px;
     }
 
     .page-hero-overlay {
@@ -2282,13 +2287,13 @@ th {
 
     .page-hero h1 {
         color: var(--text-primary);
-        font-size: 28px;
+        font-size: 32px;
     }
 
     .page-hero .subheading {
         color: var(--text-secondary);
-        font-size: 14px;
-        margin-bottom: 20px;
+        font-size: 15px;
+        margin-bottom: 24px;
     }
 
     .page-hero .badge-premium {
@@ -2309,18 +2314,19 @@ th {
     .page-hero-visual {
         display: block !important;
         width: 100%;
-        margin-top: 24px;
+        max-width: 540px;
+        margin: 24px auto 0;
     }
 
     .page-hero-visual .hero-image-card {
         position: relative !important;
         inset: auto !important;
         width: 100% !important;
-        height: 210px !important;
+        height: 240px !important;
         border-radius: 20px;
         overflow: hidden;
         transform: none !important;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
     }
 
     .page-hero-visual .hero-image-card .img-cover {
@@ -2330,3 +2336,108 @@ th {
         border-radius: 20px;
     }
 }
+
+@media (max-width: 480px) {
+    .page-hero h1 {
+        font-size: 28px;
+    }
+
+    .page-hero .subheading {
+        font-size: 14px;
+    }
+
+    .page-hero-visual .hero-image-card {
+        height: 210px !important;
+    }
+}
+
+/* === Interactive FAQ Dropdown Accordion Component === */
+.faq-accordion-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-dropdown-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.faq-dropdown-item[open] {
+    border-color: var(--primary-accent);
+    box-shadow: var(--shadow-hover);
+}
+
+.faq-dropdown-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 28px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--text-primary);
+    list-style: none;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.faq-dropdown-summary::-webkit-details-marker,
+.faq-dropdown-summary::marker {
+    display: none;
+}
+
+.faq-dropdown-summary:hover {
+    background-color: var(--secondary-bg);
+    color: var(--primary-accent);
+}
+
+.faq-dropdown-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.faq-dropdown-title i.fa-circle-question {
+    color: var(--primary-accent);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.faq-dropdown-chevron {
+    color: var(--text-secondary);
+    font-size: 16px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.faq-dropdown-item[open] .faq-dropdown-chevron {
+    transform: rotate(180deg);
+    color: var(--primary-accent);
+}
+
+.faq-dropdown-content {
+    padding: 16px 28px 24px 62px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+    border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 640px) {
+    .faq-dropdown-summary {
+        padding: 18px 20px;
+        font-size: 15px;
+    }
+    .faq-dropdown-content {
+        padding: 14px 20px 20px 20px;
+        font-size: 14px;
+    }
+}
