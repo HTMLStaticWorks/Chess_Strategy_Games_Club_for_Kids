@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Kidoo Master Logo">
+  <defs>
+    <linearGradient id="kidooWoodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5E34"/>
+      <stop offset="50%" stop-color="#5C3D2E"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </linearGradient>
+    <linearGradient id="kidooGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5EBE1"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D4A373"/>
+    </linearGradient>
+    <linearGradient id="crownGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D4A373"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Shield / Crest -->
+  <path d="M60 114 L20 88 C18 60 18 42 24 30 C30 18 45 10 60 6 C75 10 90 18 96 30 C102 42 102 60 100 88 Z" fill="url(#kidooWoodGrad)" stroke="url(#kidooGoldGrad)" stroke-width="2.5"/>
+
+  <!-- Inner Crest Line -->
+  <path d="M60 106 L26 83 C24 58 24 43 29 32 C34 22 47 15 60 12 C73 15 86 22 91 32 C96 43 96 58 94 83 Z" fill="none" stroke="url(#kidooGoldGrad)" stroke-width="1" opacity="0.6"/>
+
+  <!-- Crown Motif at Top -->
+  <path d="M46 30 L53 38 L60 26 L67 38 L74 30 L72 44 L48 44 Z" fill="url(#crownGrad)"/>
+  <circle cx="46" cy="28" r="2" fill="#FFF"/>
+  <circle cx="60" cy="24" r="2.5" fill="#FFF"/>
+  <circle cx="74" cy="28" r="2" fill="#FFF"/>
+
+  <!-- Center King / Master Chess Piece -->
+  <g fill="#FDFBF7">
+    <!-- Top Cross -->
+    <rect x="58" y="44" width="4" height="10" rx="1"/>
+    <rect x="55" y="47" width="10" height="4" rx="1"/>
+    <!-- Head -->
+    <path d="M52 56 C52 53 68 53 68 56 L66 62 C69 64 71 67 69 70 C67 73 53 73 51 70 C49 67 51 64 54 62 Z"/>
+    <!-- Body Base -->
+    <path d="M50 74 L70 74 L67 92 L53 92 Z"/>
+    <rect x="46" y="92" width="28" height="5" rx="2.5" fill="url(#kidooGoldGrad)"/>
+  </g>
+
+  <!-- Star Accents -->
+  <polygon points="34,60 36,65 41,65 37,68 39,73 34,70 29,73 31,68 27,65 32,65" fill="url(#kidooGoldGrad)" opacity="0.9"/>
+  <polygon points="86,60 88,65 93,65 89,68 91,73 86,70 81,73 83,68 79,65 84,65" fill="url(#kidooGoldGrad)" opacity="0.9"/>
+</svg>

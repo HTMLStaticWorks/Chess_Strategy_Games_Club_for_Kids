@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favWoodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5E34"/>
+      <stop offset="100%" stop-color="#42291A"/>
+    </linearGradient>
+    <linearGradient id="favAmberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5EBE1"/>
+      <stop offset="100%" stop-color="#D4A373"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 60 L10 46 C8 30 8 20 12 14 C16 8 24 4 32 2 C40 4 48 8 52 14 C56 20 56 30 54 46 Z" fill="url(#favWoodGrad)" stroke="#D4A373" stroke-width="1.5"/>
+  <g fill="#FDFBF7">
+    <rect x="31" y="6" width="2" height="6" rx="0.5"/>
+    <rect x="29" y="8" width="6" height="2" rx="0.5"/>
+    <path d="M28 13 C28 11 36 11 36 13 L35 17 C37 18 38 20 37 21 C36 23 28 23 27 21 C26 20 27 18 29 17 Z"/>
+    <path d="M27 24 L37 24 L35 36 L29 36 Z"/>
+    <rect x="25" y="36" width="14" height="3" rx="1"/>
+    <path d="M14 36 C14 28 16 22 23 22 C21 25 23 27 25 28 C23 30 22 32 23 36 L21 38 C18 38 15 39 14 36 Z"/>
+    <path d="M50 36 C50 28 48 22 41 22 C43 25 41 27 39 28 C41 30 42 32 41 36 L43 38 C46 38 49 39 50 36 Z"/>
+    <g fill="url(#favAmberGrad)">
+      <polygon points="32,55 17,44 24,44 32,50 40,44 47,44"/>
+    </g>
+  </g>
+</svg>

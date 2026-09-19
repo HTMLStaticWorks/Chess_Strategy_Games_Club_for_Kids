@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title">
+  <title>Colorful chess board with pieces</title>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#211A49"/><stop offset="1" stop-color="#5B3FD4"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#17132F" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <circle cx="1050" cy="110" r="190" fill="#F4B942" opacity=".22"/>
+  <circle cx="130" cy="610" r="220" fill="#2A9D8F" opacity=".25"/>
+  <g transform="translate(350 70) rotate(-7 260 290)" filter="url(#shadow)">
+    <rect width="520" height="520" rx="22" fill="#FFFDF5" stroke="#F4B942" stroke-width="12"/>
+    <g>
+      <path fill="#E7E0FF" d="M0 0h65v65H0zM130 0h65v65h-65zM260 0h65v65h-65zM390 0h65v65h-65zM65 65h65v65H65zM195 65h65v65h-65zM325 65h65v65h-65zM455 65h65v65h-65zM0 130h65v65H0zM130 130h65v65h-65zM260 130h65v65h-65zM390 130h65v65h-65zM65 195h65v65H65zM195 195h65v65h-65zM325 195h65v65h-65zM455 195h65v65h-65zM0 260h65v65H0zM130 260h65v65h-65zM260 260h65v65h-65zM390 260h65v65h-65zM65 325h65v65H65zM195 325h65v65h-65zM325 325h65v65h-65zM455 325h65v65h-65zM0 390h65v65H0zM130 390h65v65h-65zM260 390h65v65h-65zM390 390h65v65h-65zM65 455h65v65H65zM195 455h65v65h-65zM325 455h65v65h-65zM455 455h65v65h-65z"/>
+      <path fill="#5B3FD4" d="M65 0h65v65H65zM195 0h65v65h-65zM325 0h65v65h-65zM455 0h65v65h-65zM0 65h65v65H0zM130 65h65v65h-65zM260 65h65v65h-65zM390 65h65v65h-65zM65 130h65v65H65zM195 130h65v65h-65zM325 130h65v65h-65zM455 130h65v65h-65zM0 195h65v65H0zM130 195h65v65h-65zM260 195h65v65h-65zM390 195h65v65h-65zM65 260h65v65H65zM195 260h65v65h-65zM325 260h65v65h-65zM455 260h65v65h-65zM0 325h65v65H0zM130 325h65v65h-65zM260 325h65v65h-65zM390 325h65v65h-65zM65 390h65v65H65zM195 390h65v65h-65zM325 390h65v65h-65zM455 390h65v65h-65zM0 455h65v65H0zM130 455h65v65h-65zM260 455h65v65h-65zM390 455h65v65h-65z"/></g>
+    <g fill="#FFFDF5" stroke="#211A49" stroke-width="5"><path d="M88 134h30l13-26 15 26h30v28h-88z"/><path d="M338 382h30l13-26 15 26h30v28h-88z"/></g>
+    <g fill="#211A49" stroke="#FFFDF5" stroke-width="5"><path d="M214 270h30l13-26 15 26h30v28h-88z"/><path d="M464 134h30l13-26 15 26h30v28h-88z"/></g>
+  </g>
+  <text x="72" y="110" fill="#FFFDF5" font-family="Arial,sans-serif" font-size="34" font-weight="700">PLAY • THINK • GROW</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title">
+  <title>Friendly chess coach illustration</title>
+  <rect width="600" height="600" rx="40" fill="#E7E0FF"/>
+  <circle cx="300" cy="238" r="112" fill="#F1B48A"/>
+  <path d="M185 229c10-96 70-143 137-132 56 9 91 54 89 128-42-31-81-50-129-38-31 8-54 24-97 42z" fill="#211A49"/>
+  <circle cx="260" cy="244" r="9" fill="#211A49"/><circle cx="340" cy="244" r="9" fill="#211A49"/>
+  <path d="M270 295c19 18 42 18 61 0" fill="none" stroke="#A6504D" stroke-width="8" stroke-linecap="round"/>
+  <path d="M142 520c10-121 75-180 158-180s148 59 158 180z" fill="#5B3FD4"/>
+  <path d="M202 390l98 93 98-93" fill="none" stroke="#F4B942" stroke-width="24"/>
+  <circle cx="102" cy="108" r="44" fill="#F4B942"/><path d="M87 119h30M102 84v49" stroke="#211A49" stroke-width="8"/>
+</svg>

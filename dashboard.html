@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard | Kidoo Master</title>
+    <meta name="description" content="Parent dashboard for Kidoo Master. Enroll children in sessions, track USCF rating and puzzle progress, register for junior tournaments, and manage payments.">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dark-mode.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    <style>
+        /* Dashboard Layout Overrides */
+        body { margin: 0; }
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .dashboard-sidebar {
+            top: 0 !important;
+            height: 100vh !important;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000 !important;
+            padding-top: 0 !important;
+        }
+        .dashboard-sidebar-brand {
+            height: 72px !important;
+            min-height: 72px !important;
+            box-sizing: border-box !important;
+            padding: 0 32px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .dashboard-sidebar-brand .nav-brand {
+            margin: 0;
+            padding: 0;
+        }
+        .dashboard-nav-wrapper {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .dashboard-main-area {
+            flex: 1;
+            margin-left: 280px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .dashboard-navbar {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            z-index: 99;
+            width: calc(100% - 280px);
+            height: 72px !important;
+            min-height: 72px !important;
+            box-sizing: border-box !important;
+            background: var(--primary-bg);
+            border-bottom: 1px solid #CBD5E1 !important;
+        }
+        .dashboard-content {
+            margin-left: 0 !important;
+            padding: 0 32px 32px 32px !important;
+            padding-top: 72px !important;
+            min-height: 100vh !important;
+        }
+        .dashboard-section h2 {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            line-height: 1.2 !important;
+            font-size: 26px !important;
+        }
+        .dashboard-section h3 {
+            font-size: 20px !important;
+        }
+        .dashboard-section h4 {
+            font-size: 16px !important;
+        }
+        .mobile-only-brand {
+            display: none;
+        }
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .dashboard-sidebar { width: 220px !important; }
+            .dashboard-main-area { margin-left: 220px !important; }
+            .dashboard-navbar {
+                left: 220px !important;
+                width: calc(100% - 220px) !important;
+            }
+            .dashboard-content {
+                padding: 0 20px 20px 20px !important;
+            }
+            [dir="rtl"] .dashboard-main-area { margin-right: 220px !important; margin-left: 0 !important; }
+            [dir="rtl"] .dashboard-navbar { right: 220px !important; left: 0 !important; }
+            .dashboard-section .grid-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+            }
+            .dashboard-section .grid-3 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+            }
+            .dashboard-section .grid-2 {
+                gap: 16px !important;
+            }
+            .dashboard-nav li a {
+                font-size: 13.5px !important;
+                padding: 12px 20px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .dashboard-main-area { margin-left: 0; }
+            .mobile-only-brand { display: flex !important; }
+            .dashboard-navbar {
+                left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 400px) {
+            .care-team-row {
+                flex-wrap: wrap !important;
+                gap: 12px !important;
+            }
+            .care-team-info {
+                flex: 1 1 100% !important;
+                width: 100% !important;
+            }
+            .care-team-row > .btn {
+                align-self: flex-start !important;
+                margin-left: 64px !important;
+                flex-shrink: 0 !important;
+            }
+            .dashboard-section .grid-4 {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+            .dashboard-section .grid-4 .card {
+                padding: 16px !important;
+            }
+            .dashboard-section .grid-4 .card div[style*="font-size: 20px"] {
+                font-size: 16px !important;
+            }
+            .dashboard-section .grid-2 {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            .dashboard-content {
+                padding: 0 16px 16px 16px !important;
+            }
+        }
+
+        [dir="rtl"] .dashboard-sidebar {
+            left: auto !important;
+            right: 0 !important;
+            border-right: none !important;
+            border-left: 1px solid var(--border-color) !important;
+        }
+        [dir="rtl"] .dashboard-main-area {
+            margin-left: 0 !important;
+            margin-right: 280px !important;
+        }
+        [dir="rtl"] .dashboard-content {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+        [dir="rtl"] .dashboard-navbar {
+            left: 0 !important;
+            right: 280px !important;
+            width: auto !important;
+        }
+        [dir="rtl"] .dashboard-navbar .nav-actions {
+            margin-left: 0 !important;
+            margin-right: auto !important;
+        }
+        [dir="rtl"] .dashboard-sidebar .nav-brand {
+            flex-direction: row-reverse;
+        }
+        [dir="rtl"] .dashboard-nav li a {
+            flex-direction: row-reverse;
+            border-left: none;
+            border-right: 4px solid transparent;
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+        [dir="rtl"] .dashboard-nav li a:hover,
+        [dir="rtl"] .dashboard-nav li a.active {
+            border-right-color: var(--primary-accent);
+            border-left-color: transparent;
+        }
+        @media (max-width: 1024px) {
+            [dir="rtl"] .dashboard-sidebar {
+                transform: translateX(100%) !important;
+                right: 0 !important;
+                left: auto !important;
+            }
+            [dir="rtl"] .dashboard-sidebar.open {
+                transform: translateX(0) !important;
+            }
+            [dir="rtl"] .dashboard-main-area {
+                margin-right: 0 !important;
+            }
+            [dir="rtl"] .dashboard-navbar {
+                right: 0 !important;
+                left: 0 !important;
+            }
+        }
+
+        [dir="rtl"] .care-team-row {
+            flex-direction: row-reverse !important;
+        }
+        [dir="rtl"] .care-team-info {
+            flex-direction: row-reverse !important;
+        }
+        [dir="rtl"] .care-team-info > div {
+            text-align: right;
+        }
+        [dir="rtl"] .care-update-row {
+            flex-direction: row-reverse !important;
+        }
+        [dir="rtl"] .care-update-row > div:last-child {
+            text-align: right;
+        }
+        [dir="rtl"] .grid-4 .card,
+        [dir="rtl"] .grid-2 .card {
+            text-align: right;
+        }
+        [dir="rtl"] .chat-input-bar {
+            flex-direction: row-reverse;
+        }
+        [dir="rtl"] .user-info-divider {
+            border-left: none !important;
+            border-right: 1px solid var(--border-color) !important;
+            padding-left: 0 !important;
+            padding-right: 10px !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="dashboard-sidebar-brand">
+                <a href="index.html" class="nav-brand">
+                    <img src="assets/images/kidoo-logo.svg" alt="Kidoo Master Logo" class="nav-brand-img">
+                    <span>Kidoo<span class="brand-accent">Master</span></span>
+                </a>
+            </div>
+            
+            <div class="dashboard-nav-wrapper">
+                <ul class="dashboard-nav">
+                    <li><a href="#overview" class="active"><i class="fa-solid fa-chart-simple" style="margin-right: 10px;"></i> Progress Overview</a></li>
+                    <li><a href="#schedule"><i class="fa-solid fa-calendar-days" style="margin-right: 10px;"></i>Tournament Booking</a></li>
+                    <li><a href="#logs"><i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i> Match &amp; Puzzle Logs</a></li>
+                    <li><a href="#coaches"><i class="fa-solid fa-chess-knight" style="margin-right: 10px;"></i> Assigned Coaches</a></li>
+                    <li><a href="#messages"><i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Coach Messages</a></li>
+                    <li><a href="#billing"><i class="fa-solid fa-credit-card" style="margin-right: 10px;"></i> Subscriptions</a></li>
+                    <li><a href="#reports"><i class="fa-solid fa-chart-line" style="margin-right: 10px;"></i> USCF Analytics</a></li>
+                    <li><a href="#settings"><i class="fa-solid fa-gear" style="margin-right: 10px;"></i> Settings</a></li>
+                    <li style="margin-top: 32px; border-top: 1px solid var(--border-color); padding-top: 16px;"><a href="index.html" style="color: #e74c3c;"><i class="fa-solid fa-right-from-bracket" style="margin-right: 10px;"></i> Logout</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Area -->
+        <div class="dashboard-main-area">
+            <nav class="navbar dashboard-navbar">
+                <div class="container" style="max-width: 100%; padding: 0 32px;">
+                    <div class="mobile-only-brand">
+                        <a href="index.html" class="nav-brand">
+                            <img src="assets/images/kidoo-logo.svg" alt="Kidoo Master Logo" class="nav-brand-img">
+                            <span>Kidoo<span class="brand-accent">Master</span></span>
+                        </a>
+                    </div>
+                    <div class="nav-actions" style="flex-wrap: nowrap; gap: 10px; margin-left: auto;">
+                        <button id="themeToggle" class="action-icon" aria-label="Toggle Dark Mode" title="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+                        <button id="rtlToggle" class="action-icon" aria-label="Toggle RTL" title="Toggle RTL"><i class="fa-solid fa-arrows-left-right"></i></button>
+                        <div class="user-info-divider" style="display: flex; align-items: center; gap: 8px; border-left: 1px solid var(--border-color); padding-left: 10px;">
+                            <img src="https://ui-avatars.com/api/?name=Sarah+Jenkins&background=8B5E34&color=fff" alt="Parent" style="width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;">
+                            <span class="dashboard-username" style="font-weight: 500; white-space: nowrap;">Sarah Jenkins</span>
+                        </div>
+                        <button class="mobile-menu-toggle action-icon" id="dashboardMenuToggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="dashboard-content">
+            
+            <!-- 1. Overview -->
+            <section id="overview" class="dashboard-section active" style="padding: 0;">
+                <h2 style="margin-bottom: 32px;">Welcome back, Sarah</h2>
+                <div class="grid-4" style="margin-bottom: 40px;">
+                    <div class="card" style="padding: 24px;">
+                        <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Child Enrolled</h4>
+                        <div style="font-size: 20px; font-weight: 500;">Leo Jenkins (Age 8)</div>
+                        <p style="color: var(--primary-accent); margin-top: 8px;">Pawn to Knight Track</p>
+                    </div>
+                    <div class="card" style="padding: 24px;">
+                        <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Upcoming Session</h4>
+                        <div style="font-size: 20px; font-weight: 500;">Saturday Blitz &amp; Arena</div>
+                        <p style="color: var(--text-secondary); margin-top: 8px;">Tomorrow &bull; 2:00 PM</p>
+                    </div>
+                    <div class="card" style="padding: 24px;">
+                        <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">USCF Rating Growth</h4>
+                        <div style="font-size: 20px; font-weight: 500;">USCF 1,245 (+185)</div>
+                        <p style="color: var(--support-accent); margin-top: 8px;">Scholastic Tier 2 Achieved</p>
+                    </div>
+                    <div class="card" style="padding: 24px; background: #FEF3C7; border-color: #FDE68A;">
+                        <h4 style="color: #D97706; font-size: 14px; margin-bottom: 8px;">Tactical Mastery Alert</h4>
+                        <div style="font-size: 20px; font-weight: 500; color: #D97706;">Knight Forks (92%)</div>
+                        <p style="color: #D97706; margin-top: 8px;">Rook Endgame Drills Next</p>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="gap: 32px;">
+                    <!-- Recent Activity Logs -->
+                    <div class="card" style="padding: 32px;">
+                        <h3 style="margin-bottom: 24px;">Recent Progress Updates</h3>
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div class="care-update-row" style="display: flex; gap: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+                                <div style="width: 48px; height: 48px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-accent); flex-shrink: 0;"><i class="fa-solid fa-trophy"></i></div>
+                                <div>
+                                    <h4 style="font-size: 16px; margin-bottom: 4px;">Scholastic GrandPrix Award</h4>
+                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Leo secured 1st place trophy in U800 division with a 4-0 clean record.</p>
+                                    <span style="font-size: 12px; color: var(--text-secondary);">Today, 10:30 AM</span>
+                                </div>
+                            </div>
+                            <div class="care-update-row" style="display: flex; gap: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+                                <div style="width: 48px; height: 48px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-accent); flex-shrink: 0;"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div>
+                                    <h4 style="font-size: 16px; margin-bottom: 4px;">Tactical Puzzle Streak</h4>
+                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Solved 15 consecutive double-attack puzzle challenges cleanly.</p>
+                                    <span style="font-size: 12px; color: var(--text-secondary);">Today, 9:00 AM</span>
+                                </div>
+                            </div>
+                            <div class="care-update-row" style="display: flex; gap: 16px;">
+                                <div style="width: 48px; height: 48px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-accent); flex-shrink: 0;"><i class="fa-solid fa-chess-pawn"></i></div>
+                                <div>
+                                    <h4 style="font-size: 16px; margin-bottom: 4px;">Grandmaster Review Note</h4>
+                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">GM Alexander Petrov assigned new Opposition Endgame drills for this week.</p>
+                                    <span style="font-size: 12px; color: var(--text-secondary);">Yesterday, 8:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#logs" style="display: inline-block; margin-top: 24px; color: var(--primary-accent); font-weight: 500; text-decoration: none;">View all match records</a>
+                    </div>
+                    
+                    <!-- Quick Actions & Team -->
+                    <div style="display: flex; flex-direction: column; gap: 32px;">
+                        <div class="card" style="padding: 32px;">
+                            <h3 style="margin-bottom: 24px;">Assigned Master Coaches</h3>
+                            <div class="care-team-row" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 16px;">
+                                <div class="care-team-info" style="display: flex; align-items: center; gap: 16px;">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+                                    <div>
+                                        <h4 style="font-size: 16px; margin-bottom: 4px;">Alex Petrov, FIDE GM</h4>
+                                        <p style="color: var(--text-secondary); font-size: 14px;">Head Scholastic Coach</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; height: auto;">Message</button>
+                            </div>
+                            <div class="care-team-row" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="care-team-info" style="display: flex; align-items: center; gap: 16px;">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="WIM Sofia" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+                                    <div>
+                                        <h4 style="font-size: 16px; margin-bottom: 4px;">Sofia Martinez, WIM</h4>
+                                        <p style="color: var(--text-secondary); font-size: 14px;">Strategy Games Coach</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; height: auto;">Message</button>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding: 32px; background: var(--primary-accent); color: white; border: none;">
+                            <h3 style="margin-bottom: 16px; color: white;">Register for Upcoming Cups?</h3>
+                            <p style="margin-bottom: 24px; font-size: 14px; color: rgba(255,255,255,0.9);">Enroll Leo in the next USCF Scholastic GrandPrix tournament session.</p>
+                            <a href="#schedule" class="btn" style="background: white; color: var(--primary-accent); font-weight: 500; padding: 12px 24px; border-radius: 8px; border: none; text-decoration: none; display: inline-block;">Register Child Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Session & Tournament Booking -->
+            <section id="schedule" class="dashboard-section" style="padding: 0;">
+                <h2 style="margin-bottom: 32px;">Enroll Child &amp; Book Sessions</h2>
+                <div class="grid-2 tab-stack" style="gap: 32px;">
+                    <div class="card" style="padding: 32px;">
+                        <h3 style="margin-bottom: 24px;">Register for Session / Tournament</h3>
+                        <form>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>Preferred Date</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Preferred Time Slot</label>
+                                    <input type="time" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Session / Event Type</label>
+                                <select class="form-control">
+                                    <option>Pawn to Knight Weekly Masterclass</option>
+                                    <option>Bishop &amp; Rook Intermediate Strategy</option>
+                                    <option>Weekend Novice Blitz Cup (Friendly)</option>
+                                    <option>USCF Scholastic GrandPrix (Rated)</option>
+                                    <option>Mind Games &amp; Catan Jr Arena</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Special Notes for Coach (Optional)</label>
+                                <textarea class="form-control" rows="3" placeholder="Specify any tactical areas or chess openings your child wants to practice..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Enrollment Request</button>
+                        </form>
+                    </div>
+                    <div>
+                        <div class="card" style="padding: 32px; height: 100%;">
+                            <h3 style="margin-bottom: 24px;">Upcoming Approved Sessions</h3>
+                            <div style="display: flex; flex-direction: column; gap: 16px;">
+                                <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; border-left: 4px solid var(--primary-accent);">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                        <h4 style="font-size: 16px;">Saturday Blitz &amp; Open Arena</h4>
+                                        <span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">Enrolled</span>
+                                    </div>
+                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Tomorrow &bull; 2:00 PM - 4:30 PM</p>
+                                    <p style="color: var(--text-primary); font-size: 14px;">Instructor: Sofia Martinez, WIM</p>
+                                </div>
+                                <div style="padding: 16px; border: 1px solid var(--border-color); border-radius: 12px; border-left: 4px solid var(--highlight-accent);">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                        <h4 style="font-size: 16px;">USCF Scholastic GrandPrix Cup</h4>
+                                        <span style="background: rgba(212, 163, 115, 0.15); color: var(--support-accent); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">Confirmed</span>
+                                    </div>
+                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Saturday, Jun 20 &bull; 10:00 AM - 2:00 PM</p>
+                                    <p style="color: var(--text-primary); font-size: 14px;">Director: GM Alexander Petrov</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Match & Puzzle Logs -->
+            <section id="logs" class="dashboard-section" style="padding: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+                    <h2 style="margin: 0;">Child's Match &amp; Tactic Logs</h2>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <input type="month" class="form-control" style="width: auto; height: 40px;">
+                        <button class="btn btn-secondary" style="height: 40px; padding: 0 16px; display: flex; align-items: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Export Report</button>
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div class="table-responsive">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead style="background: var(--secondary-bg); border-bottom: 1px solid var(--border-color);">
+                                <tr>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Date &amp; Event</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Coach</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Score / Performance</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Grandmaster Coach Rationales</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 16px;"><div style="font-weight: 500;">Today</div><div style="color: var(--text-secondary); font-size: 13px;">10:30 AM</div></td>
+                                    <td style="padding: 16px;">Alex Petrov, FIDE GM</td>
+                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">4-0 Clean Win</span></td>
+                                    <td style="padding: 16px; color: var(--text-secondary); font-size: 14px; max-width: 300px;">Flawless knight fork calculations. Re-study rook vs pawn opposition rules for next week.</td>
+                                    <td style="padding: 16px;"><span style="color: var(--primary-accent); font-weight: 500;">1st Place Trophy</span></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 16px;"><div style="font-weight: 500;">Yesterday</div><div style="color: var(--text-secondary); font-size: 13px;">4:00 PM</div></td>
+                                    <td style="padding: 16px;">Sofia Martinez, WIM</td>
+                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">Tactic Score: 92%</span></td>
+                                    <td style="padding: 16px; color: var(--text-secondary); font-size: 14px; max-width: 300px;">Double attack puzzles executed accurately. Great spatial vision in Catan Jr resource game.</td>
+                                    <td style="padding: 16px;"><span style="color: var(--support-accent); font-weight: 500;">Passed</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 16px;"><div style="font-weight: 500;">Jun 14, 2026</div><div style="color: var(--text-secondary); font-size: 13px;">8:00 AM</div></td>
+                                    <td style="padding: 16px;">Alex Petrov, FIDE GM</td>
+                                    <td style="padding: 16px;"><span style="background: rgba(212, 163, 115, 0.15); color: #D4A373; padding: 4px 8px; border-radius: 4px; font-size: 13px;">Score: 68%</span></td>
+                                    <td style="padding: 16px; color: var(--text-secondary); font-size: 14px; max-width: 300px;">Weak results in Sicilian Defense opening lines. Practice pawn structure protection drills.</td>
+                                    <td style="padding: 16px;"><span style="color: #D4A373; font-weight: 500;">Drill Assigned</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Assigned Master Coaches -->
+            <section id="coaches" class="dashboard-section" style="padding: 0;">
+                <h2 style="margin-bottom: 32px;">Assigned Master Coaches</h2>
+                <div class="grid-3">
+                    <div class="card" style="text-align: center; padding: 32px; display: flex; flex-direction: column; height: 100%;">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" alt="GM Petrov" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover;">
+                        <h3 style="margin-bottom: 4px;">Alex Petrov, FIDE GM</h3>
+                        <span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; display: inline-block; margin-bottom: 16px;">Head Scholastic Coach</span>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Specializes in USCF tournament strategy and endgame calculation depth. 15 years youth coaching experience.</p>
+                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: auto;">
+                            <button class="btn btn-primary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Message</button>
+                            <button class="btn btn-secondary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Schedule</button>
+                        </div>
+                    </div>
+                    <div class="card" style="text-align: center; padding: 32px; display: flex; flex-direction: column; height: 100%;">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="WIM Sofia" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover;">
+                        <h3 style="margin-bottom: 4px;">Sofia Martinez, WIM</h3>
+                        <span style="background: rgba(176, 125, 72, 0.1); color: var(--support-accent); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; display: inline-block; margin-bottom: 16px;">Strategy Games Instructor</span>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Focuses on beginner tactical patterns, spatial board games (Catan Jr, Blokus), and rapid blitz drills.</p>
+                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: auto;">
+                            <button class="btn btn-primary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Message</button>
+                            <button class="btn btn-secondary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Schedule</button>
+                        </div>
+                    </div>
+                    <div class="card" style="text-align: center; padding: 32px; display: flex; flex-direction: column; height: 100%;">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" alt="CM Marcus" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover;">
+                        <h3 style="margin-bottom: 4px;">Marcus Vance, CM</h3>
+                        <span style="background: rgba(245, 158, 11, 0.1); color: var(--highlight-accent); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; display: inline-block; margin-bottom: 16px;">Tournament Director</span>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Directs USCF rated tournaments and updates child rating growth algorithms in the Parent Dashboard.</p>
+                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: auto;">
+                            <button class="btn btn-primary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Message</button>
+                            <button class="btn btn-secondary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Review</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Messages -->
+            <section id="messages" class="dashboard-section" style="padding: 0;">
+                <div class="chat-wrapper">
+                    <h2 style="margin-bottom: 24px; flex-shrink: 0;">Coach Messages</h2>
+                    <div class="card chat-container" style="padding: 0; display: flex; overflow: hidden;">
+                    <!-- Chat Sidebar -->
+                    <div class="chat-sidebar" style="border-right: 1px solid var(--border-color); display: flex; flex-direction: column; background: var(--card-bg);">
+                        <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
+                            <input type="text" class="form-control" placeholder="Search coach messages...">
+                        </div>
+                        <div style="flex-grow: 1; overflow-y: auto;">
+                            <!-- Active Chat -->
+                            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); background: rgba(139, 94, 52, 0.05); cursor: pointer; display: flex; gap: 12px; border-left: 3px solid var(--primary-accent);">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+                                <div style="flex-grow: 1; min-width: 0;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                        <h4 style="font-size: 15px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Alex Petrov, FIDE GM</h4>
+                                        <span style="font-size: 12px; color: var(--text-secondary);">10:42 AM</span>
+                                    </div>
+                                    <p style="margin: 0; font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">GrandPrix tournament registration is confirmed for Leo!</p>
+                                </div>
+                            </div>
+                            <!-- Chat 2 -->
+                            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; gap: 12px; border-left: 3px solid transparent; transition: background 0.2s;">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="WIM Sofia" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+                                <div style="flex-grow: 1; min-width: 0;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                        <h4 style="font-size: 15px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Sofia Martinez, WIM</h4>
+                                        <span style="font-size: 12px; color: var(--text-secondary);">Yesterday</span>
+                                    </div>
+                                    <p style="margin: 0; font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Leo played brilliantly in Catan Jr strategy today!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Area -->
+                    <div style="flex-grow: 1; display: flex; flex-direction: column; background: var(--primary-bg);">
+                        <!-- Chat Header -->
+                        <div style="padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; background: var(--card-bg);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                <div>
+                                    <h3 style="font-size: 16px; margin: 0;">Alex Petrov, FIDE GM</h3>
+                                    <span style="font-size: 13px; color: var(--support-accent);">Online</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" style="padding: 8px 16px; height: auto;">View Coach Profile</button>
+                        </div>
+                        <!-- Chat Messages -->
+                        <div style="flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 16px;">
+                                <span style="font-size: 12px; color: var(--text-secondary); background: var(--card-bg); padding: 4px 12px; border-radius: 50px; border: 1px solid var(--border-color);">Today</span>
+                            </div>
+                            <!-- Received -->
+                            <div style="display: flex; gap: 12px; max-width: 80%;">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 32px; height: 32px; border-radius: 50%; margin-top: auto; object-fit: cover;">
+                                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 16px; border-bottom-left-radius: 4px; border: 1px solid var(--border-color);">
+                                    <p style="margin: 0; font-size: 14px;">Good morning Sarah! Leo's USCF GrandPrix registration is confirmed for next Saturday. Make sure he reviews knight fork patterns beforehand.</p>
+                                    <span style="font-size: 11px; color: var(--text-secondary); margin-top: 6px; display: block;">10:05 AM</span>
+                                </div>
+                            </div>
+                            <!-- Sent -->
+                            <div style="display: flex; gap: 12px; max-width: 80%; align-self: flex-end; flex-direction: row-reverse;">
+                                <div style="background: var(--primary-accent); color: white; padding: 12px 16px; border-radius: 16px; border-bottom-right-radius: 4px;">
+                                    <p style="margin: 0; font-size: 14px;">Hi Alex, thank you so much! He was practicing tactics puzzles for 30 minutes this morning.</p>
+                                    <span style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px; display: block; text-align: right;">10:30 AM</span>
+                                </div>
+                            </div>
+                            <!-- Received -->
+                            <div style="display: flex; gap: 12px; max-width: 80%;">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 32px; height: 32px; border-radius: 50%; margin-top: auto; object-fit: cover;">
+                                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 16px; border-bottom-left-radius: 4px; border: 1px solid var(--border-color);">
+                                    <p style="margin: 0; font-size: 14px;">Excellent! He is demonstrating great focus and sportsmanship.</p>
+                                    <span style="font-size: 11px; color: var(--text-secondary); margin-top: 6px; display: block;">10:42 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Chat Input -->
+                        <div class="chat-input-bar">
+                            <button class="chat-attach-btn" aria-label="Attach file"><i class="fa-solid fa-paperclip"></i></button>
+                            <input type="text" class="chat-input-field" placeholder="Type your message to coach...">
+                            <button class="chat-send-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                <span>Send</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- 6. Subscriptions & Payments -->
+            <section id="billing" class="dashboard-section" style="padding: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+                    <h2 style="margin: 0;">Membership &amp; Payments</h2>
+                    <button class="btn btn-primary" style="height: 40px; padding: 0 16px;">Change Club Plan</button>
+                </div>
+                <div class="grid-2" style="gap: 32px; margin-bottom: 32px;">
+                    <div class="card" style="padding: 24px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Active Membership</h4>
+                            <div style="font-size: 32px; font-weight: 500; color: var(--primary-accent);">$89.00 / mo</div>
+                            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Champion Club Plan</p>
+                        </div>
+                        <div style="width: 56px; height: 56px; background: rgba(139, 94, 52, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary-accent);"><i class="fa-solid fa-credit-card"></i></div>
+                    </div>
+                    <div class="card" style="padding: 24px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Next Auto-Renewal</h4>
+                            <div style="font-size: 20px; font-weight: 500;">Jul 01, 2026</div>
+                            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Auto-pay via Visa (•••• 4242)</p>
+                        </div>
+                        <div style="width: 56px; height: 56px; background: rgba(176, 125, 72, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--support-accent);"><i class="fa-solid fa-arrows-rotate"></i></div>
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div class="table-responsive">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead style="background: var(--secondary-bg); border-bottom: 1px solid var(--border-color);">
+                                <tr>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Invoice ID</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Billing Period</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Amount</th>
+                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Status</th>
+                                    <th style="padding: 16px; text-align: right; font-weight: 500;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 16px; font-weight: 500;">#INV-2026-06</td>
+                                    <td style="padding: 16px; color: var(--text-secondary);">Jun 01 - Jun 30, 2026</td>
+                                    <td style="padding: 16px; font-weight: 500;">$89.00</td>
+                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">Paid</span></td>
+                                    <td style="padding: 16px; text-align: right;"><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px; height: auto;">Download Receipt</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 16px; font-weight: 500;">#INV-2026-05</td>
+                                    <td style="padding: 16px; color: var(--text-secondary);">May 01 - May 31, 2026</td>
+                                    <td style="padding: 16px; font-weight: 500;">$89.00</td>
+                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">Paid</span></td>
+                                    <td style="padding: 16px; text-align: right;"><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px; height: auto;">Download Receipt</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. USCF Rating Analytics & Reports -->
+            <section id="reports" class="dashboard-section" style="padding: 0;">
+                <h2 style="margin-bottom: 32px;">Child Progress &amp; USCF Rating Analytics</h2>
+                <div class="grid-3">
+                    <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
+                        <div style="width: 48px; height: 48px; background: rgba(139, 94, 52, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary-accent); margin-bottom: 16px;"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3 style="margin-bottom: 8px;">USCF Rating Growth Chart</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px; flex-grow: 1;">30-day view of USCF rating progression, win/loss ratio, and tournament performance stats.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12px; color: var(--text-secondary);">Current: USCF 1,245</span>
+                            <button class="btn btn-primary" style="padding: 6px 16px; font-size: 13px; height: auto;">View Analytics</button>
+                        </div>
+                    </div>
+                    <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
+                        <div style="width: 48px; height: 48px; background: rgba(176, 125, 72, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--support-accent); margin-bottom: 16px;"><i class="fa-solid fa-puzzle-piece"></i></div>
+                        <h3 style="margin-bottom: 8px;">Tactical Category Accuracy</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px; flex-grow: 1;">Breakdown of accuracy across forks, pins, skewer tactics, and rook endgames.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12px; color: var(--text-secondary);">Last updated today</span>
+                            <button class="btn btn-primary" style="padding: 6px 16px; font-size: 13px; height: auto;">View Analytics</button>
+                        </div>
+                    </div>
+                    <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
+                        <div style="width: 48px; height: 48px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--highlight-accent); margin-bottom: 16px;"><i class="fa-solid fa-medal"></i></div>
+                        <h3 style="margin-bottom: 8px;">Curriculum Adherence</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px; flex-grow: 1;">Percentage of recommended opening worksheets and tactic exercises completed.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12px; color: var(--text-secondary);">94% Completed</span>
+                            <button class="btn btn-primary" style="padding: 6px 16px; font-size: 13px; height: auto;">View Analytics</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Settings -->
+            <section id="settings" class="dashboard-section" style="padding: 0;">
+                <h2 style="margin-bottom: 32px;">Parent &amp; Account Settings</h2>
+                <div class="grid-2" style="gap: 32px;">
+                    <div class="card" style="padding: 32px;">
+                        <h3 style="margin-bottom: 24px;">Parent &amp; Child Profile Information</h3>
+                        <form>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>Parent First Name</label>
+                                    <input type="text" class="form-control" value="Sarah">
+                                </div>
+                                <div class="form-group">
+                                    <label>Parent Last Name</label>
+                                    <input type="text" class="form-control" value="Jenkins">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Child's Full Name</label>
+                                <input type="text" class="form-control" value="Leo Jenkins">
+                            </div>
+                            <div class="form-group">
+                                <label>Parent Email Address</label>
+                                <input type="email" class="form-control" value="sarah.jenkins@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
+                        </form>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 32px;">
+                        <div class="card" style="padding: 32px;">
+                            <h3 style="margin-bottom: 24px;">Notification Preferences</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label>Weekly Progress Summaries</label>
+                                    <select class="form-control">
+                                        <option>Daily Rating Reports</option>
+                                        <option selected>Weekly Progress Summaries</option>
+                                        <option>Tournament Cup Alerts Only</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Language</label>
+                                    <select class="form-control">
+                                        <option selected>English</option>
+                                        <option>Spanish</option>
+                                        <option>French</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-secondary mt-3">Save Preferences</button>
+                            </form>
+                        </div>
+                        <div class="card" style="padding: 32px; border-color: rgba(239, 68, 68, 0.3);">
+                            <h3 style="margin-bottom: 16px; color: #EF4444;">Danger Zone</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">If you cancel your membership, child USCF rating history and puzzle badges will be archived.</p>
+                            <button class="btn" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);">Cancel Membership</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

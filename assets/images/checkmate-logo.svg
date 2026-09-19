@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Checkmate Logo">
+  <defs>
+    <linearGradient id="woodShieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5E34"/>
+      <stop offset="100%" stop-color="#42291A"/>
+    </linearGradient>
+    <linearGradient id="amberAccentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5EBE1"/>
+      <stop offset="100%" stop-color="#D4A373"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield / Crest Outer Line -->
+  <path d="M60 114 L20 88 C18 60 18 42 24 30 C30 18 45 10 60 6 C75 10 90 18 96 30 C102 42 102 60 100 88 Z" fill="url(#woodShieldGrad)" stroke="#D4A373" stroke-width="2"/>
+
+  <!-- Inner Crest Content -->
+  <g fill="#FDFBF7">
+    <!-- Center King Chess Piece -->
+    <!-- Top Cross -->
+    <rect x="58" y="14" width="4" height="10" rx="1"/>
+    <rect x="55" y="17" width="10" height="4" rx="1"/>
+    <!-- King Head / Crown -->
+    <path d="M53 26 C53 23 67 23 67 26 L65 32 C68 34 70 37 68 40 C66 43 54 43 52 40 C50 37 52 34 55 32 Z"/>
+    <!-- King Body -->
+    <path d="M51 44 L69 44 L66 66 L54 66 Z"/>
+    <rect x="47" y="66" width="26" height="5" rx="2"/>
+
+    <!-- Left Knight Chess Piece -->
+    <path d="M26 68 C26 52 30 42 42 42 C40 47 43 51 47 53 C44 57 41 61 44 68 L41 72 C35 72 29 74 26 68 Z"/>
+    <circle cx="37" cy="48" r="2" fill="#42291A"/>
+
+    <!-- Right Knight Chess Piece -->
+    <path d="M94 68 C94 52 90 42 78 42 C80 47 77 51 73 53 C76 57 79 61 76 68 L79 72 C85 72 91 74 94 68 Z"/>
+    <circle cx="83" cy="48" r="2" fill="#42291A"/>
+
+    <!-- Checkered Board Base Grid -->
+    <g fill="url(#amberAccentGrad)">
+      <!-- Row 1 -->
+      <polygon points="60,106 32,84 46,84 60,95 74,84 88,84"/>
+      <!-- Alternating Tiles -->
+      <polygon points="60,95 46,84 53,84 60,90 67,84 74,84" fill="#FDFBF7"/>
+      <polygon points="60,90 53,84 60,84 67,84" fill="url(#amberAccentGrad)"/>
+    </g>
+  </g>
+</svg>
