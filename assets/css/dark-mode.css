@@ -86,12 +86,17 @@
     color: var(--text-primary);
 }
 
+[data-theme="dark"] .footer-links li,
 [data-theme="dark"] .footer-links a {
     color: var(--text-secondary);
 }
 
+[data-theme="dark"] .footer-links li i {
+    color: var(--primary-accent);
+}
+
 [data-theme="dark"] .footer-links a:hover {
-    color: #FFFFFF;
+    color: var(--primary-accent);
 }
 
 [data-theme="dark"] .footer-bottom {

@@ -418,61 +418,121 @@
 
             <!-- 2. Session & Tournament Booking -->
             <section id="schedule" class="dashboard-section" style="padding: 0;">
-                <h2 style="margin-bottom: 32px;">Enroll Child &amp; Book Sessions</h2>
-                <div class="grid-2 tab-stack" style="gap: 32px;">
-                    <div class="card" style="padding: 32px;">
-                        <h3 style="margin-bottom: 24px;">Register for Session / Tournament</h3>
-                        <form>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label>Preferred Date</label>
-                                    <input type="date" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Preferred Time Slot</label>
-                                    <input type="time" class="form-control" required>
-                                </div>
+                <!-- Booking Portal Hero Header -->
+                <div class="booking-portal-hero">
+                    <div class="booking-hero-left">
+                        <span class="booking-portal-badge"><i class="fa-solid fa-chess-king"></i> Tournament &amp; Masterclass Hub</span>
+                        <h2 style="margin: 0 0 6px 0; font-size: 24px;">Tournament &amp; Session Booking Portal</h2>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 14px; max-width: 620px;">Register Leo for USCF state qualifiers, blitz sprint cups, or reserve custom 1-on-1 Grandmaster coaching.</p>
+                        
+                        <div class="booking-stats-strip">
+                            <div class="b-stat-item">
+                                <span class="b-stat-label">USCF Member ID</span>
+                                <span class="b-stat-val">#189420-A</span>
                             </div>
-                            <div class="form-group">
-                                <label>Session / Event Type</label>
-                                <select class="form-control">
-                                    <option>Pawn to Knight Weekly Masterclass</option>
-                                    <option>Bishop &amp; Rook Intermediate Strategy</option>
-                                    <option>Weekend Novice Blitz Cup (Friendly)</option>
-                                    <option>USCF Scholastic GrandPrix (Rated)</option>
-                                    <option>Mind Games &amp; Catan Jr Arena</option>
-                                </select>
+                            <div class="b-stat-divider"></div>
+                            <div class="b-stat-item">
+                                <span class="b-stat-label">Blitz Rating</span>
+                                <span class="b-stat-val">1140 <small style="color: #10b981; font-weight: 700;">+45</small></span>
                             </div>
-                            <div class="form-group">
-                                <label>Special Notes for Coach (Optional)</label>
-                                <textarea class="form-control" rows="3" placeholder="Specify any tactical areas or chess openings your child wants to practice..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Enrollment Request</button>
-                        </form>
-                    </div>
-                    <div>
-                        <div class="card" style="padding: 32px; height: 100%;">
-                            <h3 style="margin-bottom: 24px;">Upcoming Approved Sessions</h3>
-                            <div class="upcoming-sessions-container" style="display: flex; flex-direction: column; gap: 16px;">
-                                <div class="session-card" style="border: 1px solid var(--border-color); border-left: 4px solid var(--primary-accent);">
-                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                        <h4 style="font-size: 16px; margin: 0;">Saturday Blitz &amp; Open Arena</h4>
-                                        <span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">Enrolled</span>
-                                    </div>
-                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Tomorrow &bull; 2:00 PM - 4:30 PM</p>
-                                    <p style="color: var(--text-primary); font-size: 14px; margin: 0;">Instructor: Sofia Martinez, WIM</p>
-                                </div>
-                                <div class="session-card" style="border: 1px solid var(--border-color); border-left: 4px solid var(--highlight-accent);">
-                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                        <h4 style="font-size: 16px; margin: 0;">USCF Scholastic GrandPrix Cup</h4>
-                                        <span style="background: rgba(212, 163, 115, 0.15); color: var(--support-accent); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">Confirmed</span>
-                                    </div>
-                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 4px;">Saturday, Jun 20 &bull; 10:00 AM - 2:00 PM</p>
-                                    <p style="color: var(--text-primary); font-size: 14px; margin: 0;">Director: GM Alexander Petrov</p>
-                                </div>
+                            <div class="b-stat-divider"></div>
+                            <div class="b-stat-item">
+                                <span class="b-stat-label">Active Pass</span>
+                                <span class="b-stat-val">3 Events </span>
                             </div>
                         </div>
                     </div>
+
+                    <div class="booking-category-pills">
+                        <button type="button" class="booking-category-pill active"><i class="fa-solid fa-layer-group"></i> All Events</button>
+                        <button type="button" class="booking-category-pill"><i class="fa-solid fa-trophy"></i> USCF Rated</button>
+                        <button type="button" class="booking-category-pill"><i class="fa-solid fa-bolt"></i> Blitz Cups</button>
+                        <button type="button" class="booking-category-pill"><i class="fa-solid fa-dice-d6"></i> Arena Meets</button>
+                    </div>
+                </div>
+
+                <!-- Featured Upcoming Tournaments Grid -->
+                <div class="tournament-browse-grid">
+                    <!-- Card 1 -->
+                    <div class="tournament-card-v2">
+                        <div class="t-card-header">
+                            <span class="t-type-tag tag-blitz"><i class="fa-solid fa-bolt"></i> Friendly Blitz</span>
+                            <span class="t-status-tag">18/24 Enrolled</span>
+                        </div>
+                        <h3 class="t-card-title">Weekend Novice Blitz Cup</h3>
+                        <div class="t-capacity-bar" title="75% capacity"><div class="t-capacity-fill" style="width: 75%;"></div></div>
+                        
+                        <div class="t-card-meta-list">
+                            <div class="t-meta-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>Sunday, Jun 28</strong> &bull; 2:00 PM</span></div>
+                            <div class="t-meta-row"><i class="fa-solid fa-user-gear"></i> <span>Director: WIM Sofia Martinez</span></div>
+                            <div class="t-meta-row"><i class="fa-solid fa-location-dot"></i> <span>Strategy Arena Hall A</span></div>
+                        </div>
+
+                        <div class="t-card-footer">
+                            <div class="t-price-box">
+                                <span class="t-price-amount">$25</span>
+                                <span class="t-price-sub">/ entry</span>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" style="padding: 8px 16px; font-size: 13px; height: auto;">Book Event</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 (USCF Featured) -->
+                    <div class="tournament-card-v2 featured-uscf">
+                        <div class="t-card-header">
+                            <span class="t-type-tag tag-uscf"><i class="fa-solid fa-crown"></i> USCF Rated</span>
+                            <span class="t-status-tag tag-hot">Filling Fast</span>
+                        </div>
+                        <h3 class="t-card-title">USCF Scholastic GrandPrix Cup</h3>
+                        <div class="t-capacity-bar" title="88% capacity"><div class="t-capacity-fill fill-hot" style="width: 88%;"></div></div>
+                        
+                        <div class="t-card-meta-list">
+                            <div class="t-meta-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>Saturday, Jul 11</strong> &bull; 10:00 AM</span></div>
+                            <div class="t-meta-row"><i class="fa-solid fa-user-gear"></i> <span>Director: GM Alexander Petrov</span></div>
+                            <div class="t-meta-row"><i class="fa-solid fa-layer-group"></i> <span>Sections: U800 &amp; U1200</span></div>
+                        </div>
+
+                        <div class="t-card-footer">
+                            <div class="t-price-box">
+                                <span class="t-price-amount">$35</span>
+                                <span class="t-price-sub">/ entry</span>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" style="padding: 8px 16px; font-size: 13px; height: auto;">Book Event</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="tournament-card-v2">
+                        <div class="t-card-header">
+                            <span class="t-type-tag tag-arena"><i class="fa-solid fa-dice"></i> Multi-Game Arena</span>
+                            <span class="t-status-tag">12/20 Enrolled</span>
+                        </div>
+                        <h3 class="t-card-title">Strategy Board Game Triathlon</h3>
+                        <div class="t-capacity-bar" title="60% capacity"><div class="t-capacity-fill" style="width: 60%;"></div></div>
+                        
+                        <div class="t-card-meta-list">
+                            <div class="t-meta-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>Saturday, Jul 18</strong> &bull; 1:00 PM</span></div>
+                            <div class="t-meta-row"><i class="fa-solid fa-user-gear"></i> <span>Director: CM Marcus Vance</span></div>
+                            <div class="t-meta-row"><i class="fa-solid fa-gamepad"></i> <span>Catan Jr, Blokus &amp; Rapid</span></div>
+                        </div>
+
+                        <div class="t-card-footer">
+                            <div class="t-price-box">
+                                <span class="t-price-amount">$20</span>
+                                <span class="t-price-sub">/ entry</span>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 13px; height: auto;">Book Event</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Interactive Booking Form & Approved Sessions -->
+                <div class="grid-2 tab-stack" style="gap: 28px;">
+                    <!-- Booking Form Card -->
+                    
+
+                    <!-- Active Tickets & Entry Passes -->
+                    
                 </div>
             </section>
 
