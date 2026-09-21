@@ -30,6 +30,12 @@
             border: 1px solid var(--border-color);
             margin-top: 40px;
         }
+        .auth-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
         .auth-link {
             color: var(--primary-accent);
             font-weight: 500;
@@ -43,6 +49,9 @@
             .auth-card {
                 padding: 32px 20px;
                 margin-top: 60px;
+            }
+            .auth-card h2 {
+                font-size: 21px;
             }
             .fixed-toggles {
                 top: 16px !important;
@@ -62,7 +71,7 @@
             <div class="text-center mb-4">
                 <a href="index.html" class="nav-brand" style="justify-content: center; margin-bottom: 24px;">
                     <img src="assets/images/kidoo-logo.svg" alt="Kidoo Master Logo" class="nav-brand-img">
-                    <span style="font-size: 24px;">Kidoo<span class="brand-accent">Master</span></span>
+                    <span style="font-size: 20px;">Kidoo<span class="brand-accent">Master</span></span>
                 </a>
                 <h2>Enroll Your Child & Create Account</h2>
                 <p class="subheading" style="margin-bottom: 0;">Sign up to book sessions, track rating progress, and register for junior tournaments.</p>
@@ -93,6 +102,16 @@
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                         </button>
                     </div>
+                </div>
+                <div class="form-group" style="position: relative; margin-bottom: 20px;">
+                    <label>Confirm Password</label>
+                    <div style="position: relative;">
+                        <input type="password" class="form-control" id="confirmPasswordReg" placeholder="" required style="padding-right: 48px; width: 100%;">
+                        <button type="button" onclick="var p=document.getElementById('confirmPasswordReg'); p.type = (p.type === 'password') ? 'text' : 'password';" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 0; z-index: 10;">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                    <p id="pwMatchError" style="color: #e74c3c; font-size: 13px; margin: 6px 0 0; display: none;">Passwords do not match.</p>
                 </div>
                 <div class="form-group" style="margin-bottom: 24px;">
                     <label style="display: flex; align-items: flex-start; gap: 8px; margin: 0; font-weight: 400; cursor: pointer; font-size: 14px;">
@@ -131,5 +150,37 @@
     </div>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        (function () {
+            var form = document.querySelector('.auth-page form');
+            var pwField = document.getElementById('passwordInputReg');
+            var confirmField = document.getElementById('confirmPasswordReg');
+            var errorMsg = document.getElementById('pwMatchError');
+
+            function validateMatch() {
+                if (confirmField.value && pwField.value !== confirmField.value) {
+                    errorMsg.style.display = 'block';
+                    confirmField.style.borderColor = '#e74c3c';
+                    return false;
+                } else {
+                    errorMsg.style.display = 'none';
+                    confirmField.style.borderColor = '';
+                    return true;
+                }
+            }
+
+            confirmField.addEventListener('input', validateMatch);
+            pwField.addEventListener('input', function () {
+                if (confirmField.value) validateMatch();
+            });
+
+            form.addEventListener('submit', function (e) {
+                if (!validateMatch()) {
+                    e.preventDefault();
+                    confirmField.focus();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

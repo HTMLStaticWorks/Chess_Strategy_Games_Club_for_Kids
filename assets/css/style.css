@@ -914,6 +914,153 @@ select.form-control {
     margin-bottom: 48px;
 }
 
+/* ============================================================
+   Hero Highlight Items Row (index.html hero)
+   ============================================================ */
+.hero-highlights-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+    margin-top: 0;
+}
+
+.hero-highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.hero-highlight-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(139, 94, 52, 0.10);
+    color: var(--primary-accent);
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+/* On desktop hero-has-bg (dark overlay), force white text */
+@media (min-width: 769px) {
+    .hero-has-bg .hero-highlights-row {
+        border-top-color: rgba(255, 255, 255, 0.20);
+    }
+    .hero-has-bg .hero-highlight-item {
+        color: rgba(255, 255, 255, 0.90);
+    }
+    .hero-has-bg .hero-highlight-icon {
+        background: rgba(255, 255, 255, 0.12);
+        color: #F3D5A5;
+    }
+}
+
+/* Mobile (≤768px): light mode uses theme vars, already visible */
+@media (max-width: 768px) {
+    .hero-highlights-row {
+        gap: 16px;
+        padding-top: 24px;
+    }
+    .hero-highlight-item {
+        font-size: 13px;
+    }
+}
+
+/* ============================================================
+   Hero Stage Cards (home-2.html hero)
+   ============================================================ */
+.hero-stage-cards {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-color);
+}
+
+.hero-stage-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 20px;
+    background: rgba(139, 94, 52, 0.07);
+    border: 1px solid rgba(139, 94, 52, 0.18);
+    border-radius: 14px;
+    min-width: 120px;
+    flex: 1;
+    max-width: 160px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.hero-stage-card:hover {
+    background: rgba(139, 94, 52, 0.14);
+    transform: translateY(-2px);
+}
+
+.stage-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--primary-accent);
+}
+
+.stage-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+/* On desktop hero-has-bg (dark overlay), force white text */
+@media (min-width: 769px) {
+    .hero-has-bg .hero-stage-cards {
+        border-top-color: rgba(255, 255, 255, 0.20);
+    }
+    .hero-has-bg .hero-stage-card {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.18);
+    }
+    .hero-has-bg .hero-stage-card:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+    .hero-has-bg .stage-tag {
+        color: #F3D5A5;
+    }
+    .hero-has-bg .stage-title {
+        color: rgba(255, 255, 255, 0.90);
+    }
+}
+
+/* Mobile (≤768px): light mode visible with theme vars */
+@media (max-width: 768px) {
+    .hero-stage-cards {
+        gap: 12px;
+        padding-top: 24px;
+    }
+    .hero-stage-card {
+        min-width: 90px;
+        padding: 12px 14px;
+    }
+    .stage-title {
+        font-size: 13px;
+    }
+}
+
 .btn-glass {
     background: rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1503,6 +1650,16 @@ th {
     transform: translateY(0);
 }
 
+/* Hero content is above-the-fold — never hide it.
+   Make it visible immediately so responsive tools & slow
+   JS environments always show the heading / subheading. */
+.hero-premium .fade-up,
+.hero-premium .hero-premium-content,
+.hero-premium .hero-premium-visual {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
@@ -1723,6 +1880,68 @@ th {
     .floating-stat-card,
     .glass-panel-bg {
         display: none !important;
+    }
+
+    /* ── Force light-mode readable colors on mobile hero ──
+       On mobile the dark photo is removed, so all text must
+       use the theme's dark palette instead of white. */
+    .hero-has-bg .hero-premium-content h1,
+    .hero-has-bg .hero-premium h1 {
+        color: var(--text-primary) !important;
+    }
+
+    .hero-has-bg .text-highlight {
+        background: linear-gradient(120deg, var(--primary-accent), var(--support-accent)) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        color: transparent !important;
+    }
+
+    .hero-has-bg .hero-premium-content .subheading,
+    .hero-has-bg .hero-premium .subheading {
+        color: var(--text-secondary) !important;
+    }
+
+    .hero-has-bg .badge-premium {
+        background: rgba(139, 94, 52, 0.08) !important;
+        border-color: rgba(139, 94, 52, 0.20) !important;
+        color: var(--primary-accent) !important;
+    }
+
+    .hero-has-bg .btn-glass {
+        background: rgba(0, 0, 0, 0.04) !important;
+        border-color: rgba(0, 0, 0, 0.12) !important;
+        color: var(--text-primary) !important;
+    }
+
+    .hero-has-bg .hero-highlight-item {
+        color: var(--text-primary) !important;
+    }
+
+    .hero-has-bg .hero-highlight-icon {
+        background: rgba(139, 94, 52, 0.10) !important;
+        color: var(--primary-accent) !important;
+    }
+
+    .hero-has-bg .hero-highlights-row {
+        border-top-color: var(--border-color) !important;
+    }
+
+    .hero-has-bg .stage-title {
+        color: var(--text-primary) !important;
+    }
+
+    .hero-has-bg .stage-tag {
+        color: var(--primary-accent) !important;
+    }
+
+    .hero-has-bg .hero-stage-card {
+        background: rgba(139, 94, 52, 0.07) !important;
+        border-color: rgba(139, 94, 52, 0.18) !important;
+    }
+
+    .hero-has-bg .hero-stage-cards {
+        border-top-color: var(--border-color) !important;
     }
 }
 
@@ -3246,5 +3465,19 @@ th {
     }
     .b-stat-divider {
         display: none;
+    }
+}
+
+/* === Auth Pages Headings === */
+.auth-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+}
+
+@media (max-width: 480px) {
+    .auth-card h2 {
+        font-size: 21px;
     }
 }
