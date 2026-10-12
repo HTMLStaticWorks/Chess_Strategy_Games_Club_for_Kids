@@ -268,6 +268,44 @@
             padding-left: 0 !important;
             padding-right: 10px !important;
         }
+
+        /* Remove unnecessary scroll option from bottom containers on Subscription and Match & Puzzle Logs in 1440px, 1024px and 768px */
+        @media (min-width: 768px) {
+            #logs .card > .table-responsive,
+            #billing .card > .table-responsive {
+                overflow-x: hidden !important;
+                overflow-y: visible !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+            }
+            #logs .card > .table-responsive::-webkit-scrollbar,
+            #billing .card > .table-responsive::-webkit-scrollbar {
+                display: none !important;
+                height: 0 !important;
+                width: 0 !important;
+            }
+            #logs .table-responsive table,
+            #billing .table-responsive table {
+                width: 100% !important;
+                max-width: 100% !important;
+                table-layout: auto !important;
+            }
+            #logs .table-responsive th,
+            #logs .table-responsive td {
+                padding: 14px 12px !important;
+                font-size: 13.5px !important;
+                white-space: normal !important;
+            }
+            #billing .table-responsive th,
+            #billing .table-responsive td {
+                padding: 14px 16px !important;
+                font-size: 14px !important;
+                white-space: normal !important;
+            }
+            #logs .table-responsive td[style*="max-width: 300px"] {
+                max-width: 250px !important;
+            }
+        }
     </style>
 </head>
 <body>

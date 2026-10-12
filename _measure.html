@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><body style="margin:0"><pre id="out">pending</pre>
+<script>
+const sizes=[[1920,1080],[1440,900],[1280,720]];
+const res=[];
+function run(i){
+  if(i>=sizes.length){document.getElementById('out').textContent='RESULT '+JSON.stringify(res);return;}
+  const [w,h]=sizes[i];
+  const r={size:w+'x'+h};
+  let n=0;
+  const pages=[['index.html','section.hero-premium'],['home-2.html','section.hero-home2']];
+  function page(j){
+    if(j>=pages.length){res.push(r);run(i+1);return;}
+    const f=document.createElement('iframe');
+    f.style.cssText='width:'+w+'px;height:'+h+'px;border:0;position:absolute;left:0;top:0';
+    f.src=pages[j][0];
+    f.onload=()=>setTimeout(()=>{
+      const el=f.contentDocument.querySelector(pages[j][1]);
+      r[pages[j][0]]=Math.round(el.getBoundingClientRect().height);
+      f.remove();page(j+1);
+    },800);
+    document.body.appendChild(f);
+  }
+  page(0);
+}
+run(0);
+</script></body></html>

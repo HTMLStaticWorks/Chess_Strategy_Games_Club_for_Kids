@@ -309,7 +309,7 @@ small {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 10px;
     list-style: none;
     margin: 0 auto;
     flex-wrap: nowrap;
@@ -325,15 +325,25 @@ small {
     text-decoration: none;
     color: var(--text-secondary);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14.5px;
     white-space: nowrap;
     transition: var(--transition);
-    padding: 6px 3px;
+    padding: 7px 12px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links a:hover {
     color: var(--primary-accent);
+    background: rgba(139, 94, 52, 0.08);
+}
+
+.nav-links a.active {
+    color: var(--primary-accent) !important;
+    font-weight: 700 !important;
+    background: rgba(139, 94, 52, 0.12) !important;
+    box-shadow: inset 0 0 0 1.5px var(--primary-accent);
 }
 
 .nav-actions {
@@ -402,14 +412,14 @@ small {
     .nav-links {
         position: static;
         transform: none;
-        gap: 12px;
-        padding: 0 6px;
+        gap: 6px;
+        padding: 0 4px;
         margin: 0 auto;
     }
 
     .nav-links a {
-        font-size: 13.5px;
-        padding: 4px 2px;
+        font-size: 13px;
+        padding: 5px 8px;
         white-space: nowrap;
     }
 
@@ -2221,16 +2231,15 @@ th {
 /* 3. Study Packages: Horizontal scrollbar for Package Comparison */
 .table-responsive {
     width: 100%;
-    overflow-x: scroll !important;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: auto !important;
-    scrollbar-color: var(--primary-accent) #F5EBE1 !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-accent) #F5EBE1;
 }
 
 /* Custom Scrollbar for Package Comparison on small viewports */
 .table-responsive::-webkit-scrollbar {
-    height: 10px !important;
-    display: block !important;
+    height: 8px;
 }
 
 .table-responsive::-webkit-scrollbar-track {
@@ -3480,4 +3489,602 @@ th {
     .auth-card h2 {
         font-size: 21px;
     }
-}
+}
+
+/* =========================================================
+   HOME PAGE 2 — DISTINCT HERO SECTION
+   Command Center & Pathway Studio Hero
+   ========================================================= */
+.hero-home2 {
+    padding: 130px 0 70px;
+    background: radial-gradient(circle at 10% 15%, rgba(139, 94, 52, 0.08) 0%, transparent 55%), 
+                radial-gradient(circle at 90% 85%, rgba(212, 163, 115, 0.12) 0%, transparent 55%), 
+                var(--primary-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .hero-home2 {
+    background: radial-gradient(circle at 10% 15%, rgba(139, 94, 52, 0.22) 0%, transparent 60%), 
+                radial-gradient(circle at 90% 85%, rgba(176, 125, 72, 0.15) 0%, transparent 60%), 
+                #1C130E;
+}
+
+.hero-home2-header {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 48px;
+}
+
+.hero-home2-title {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.hero-home2-subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.hero-trust-pills {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 24px;
+    border-radius: 50px;
+    box-shadow: var(--shadow);
+    margin-top: 24px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+}
+
+.hero-trust-pills strong {
+    color: var(--text-primary);
+}
+
+.hero-trust-pills .pill-divider {
+    color: var(--border-color);
+}
+
+/* Dual Panel Matrix */
+.hero-home2-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 56px;
+}
+
+.hero-matrix-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-matrix-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+}
+
+.hero-matrix-image-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    min-height: 480px;
+    display: flex;
+    transition: var(--transition);
+}
+
+.hero-matrix-image-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+}
+
+.hero-matrix-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-matrix-image-card:hover img {
+    transform: scale(1.03);
+}
+
+.hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28, 19, 14, 0.2) 0%, rgba(28, 19, 14, 0.65) 100%);
+    pointer-events: none;
+}
+
+.floating-badge-top-left {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(253, 251, 247, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .floating-badge-top-left {
+    background: rgba(28, 19, 14, 0.92);
+    color: #FDFBF7;
+    border-color: #422D22;
+}
+
+.floating-badge-bottom-bar {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(253, 251, 247, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+[data-theme="dark"] .floating-badge-bottom-bar {
+    background: rgba(40, 27, 20, 0.92);
+    border-color: #422D22;
+}
+
+.matrix-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.matrix-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.live-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #EF4444;
+    animation: pulse 1.8s infinite;
+}
+
+.matrix-tactic-box {
+    background: var(--secondary-bg);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.matrix-chess-preview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.chess-mini-board {
+    display: grid;
+    grid-template-columns: repeat(4, 28px);
+    grid-template-rows: repeat(4, 28px);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--primary-accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.chess-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.chess-cell.light { background: #EDE0D4; color: #2C1810; }
+.chess-cell.dark { background: #8B5E34; color: #FDFBF7; }
+.chess-cell.highlight { background: #D4A373; color: #1C130E; }
+
+.matrix-next-event {
+    margin-top: auto;
+    background: linear-gradient(135deg, rgba(139, 94, 52, 0.08) 0%, rgba(139, 94, 52, 0.02) 100%);
+    border: 1px dashed var(--primary-accent);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* Right Student Card */
+.student-stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.student-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--secondary-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.student-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-accent), var(--highlight-accent));
+    border-radius: 4px;
+}
+
+.skill-matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.skill-pill {
+    background: var(--secondary-bg);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coach-note-box {
+    margin-top: auto;
+    background: var(--secondary-bg);
+    border-left: 3px solid var(--primary-accent);
+    padding: 12px 14px;
+    border-radius: 0 10px 10px 0;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* 4-Stage Pathway Timeline */
+.hero-home2-pathway-wrapper {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: var(--shadow);
+}
+
+.hero-pathway-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-home2-pathway {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position: relative;
+}
+
+.pathway-step-card {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 22px 18px;
+    position: relative;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.pathway-step-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-accent);
+    box-shadow: var(--shadow);
+}
+
+.pathway-step-card.active-step {
+    border-color: var(--primary-accent);
+    border-width: 2px;
+    background: var(--card-bg);
+}
+
+.step-num-pill {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-accent);
+    background: rgba(139, 94, 52, 0.1);
+    padding: 4px 10px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.step-card-icon {
+    font-size: 26px;
+    color: var(--primary-accent);
+    margin-bottom: 12px;
+}
+
+.step-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.step-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    flex-grow: 1;
+}
+
+.step-badge {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--support-accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 1024px) {
+    .hero-home2-title { font-size: 42px; }
+    .hero-home2-matrix { grid-template-columns: 1fr; }
+    .hero-home2-pathway { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .hero-home2 { padding: 110px 0 50px; }
+    .hero-home2-title { font-size: 30px; }
+    .hero-home2-subtitle { font-size: 15px; }
+    .hero-trust-pills { flex-direction: column; gap: 8px; border-radius: 16px; padding: 14px; }
+    .hero-trust-pills .pill-divider { display: none; }
+    .hero-home2-pathway { grid-template-columns: 1fr; }
+    .matrix-next-event { flex-direction: column; align-items: flex-start; }
+    .matrix-chess-preview { flex-direction: column; align-items: flex-start; }
+}
+/* ============================================================
+   Home 1 Hero — content after the highlights row
+   (pathway label, stats band, parent quote, trust pills)
+   ============================================================ */
+.hero-extra-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 44px 0 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--primary-accent);
+}
+
+.hero-extra-label i {
+    font-size: 14px;
+}
+
+.hero-stats-band {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    margin-top: 40px;
+    padding: 22px 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    text-align: center;
+}
+
+.hero-stat + .hero-stat {
+    border-left: 1px solid var(--border-color);
+}
+
+.hero-stat strong {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(120deg, var(--primary-accent), var(--support-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-stat span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.hero-quote-card {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    margin-top: 32px;
+    padding: 24px 32px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.hero-quote-stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #F5B83D;
+}
+
+.hero-quote-card p {
+    margin: 0 0 14px;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--text-primary);
+}
+
+.hero-quote-author {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.hero-trust-pills-home1 {
+    margin-top: 32px;
+}
+
+/* Desktop: glass treatment over the dark photo overlay */
+@media (min-width: 769px) {
+    .hero-has-bg .hero-extra-label {
+        color: #F3D5A5;
+    }
+
+    .hero-has-bg .hero-stats-band,
+    .hero-has-bg .hero-quote-card {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.18);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+    }
+
+    .hero-has-bg .hero-stat + .hero-stat {
+        border-left-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-has-bg .hero-stat strong {
+        background: none;
+        color: #F3D5A5;
+    }
+
+    .hero-has-bg .hero-stat span,
+    .hero-has-bg .hero-quote-author {
+        color: rgba(255, 255, 255, 0.75);
+    }
+
+    .hero-has-bg .hero-quote-card p {
+        color: rgba(255, 255, 255, 0.92);
+    }
+
+    .hero-has-bg .hero-trust-pills {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.75);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        box-shadow: none;
+    }
+
+    .hero-has-bg .hero-trust-pills strong {
+        color: #FFFFFF;
+    }
+
+    .hero-has-bg .hero-trust-pills .pill-divider {
+        color: rgba(255, 255, 255, 0.35);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-extra-label {
+        margin: 32px 0 14px;
+        font-size: 12px;
+    }
+
+    .hero-stats-band {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 18px;
+        margin-top: 32px;
+        padding: 18px 8px;
+    }
+
+    .hero-stat:nth-child(odd) {
+        border-left: 0;
+    }
+
+    .hero-stat strong {
+        font-size: 24px;
+    }
+
+    .hero-quote-card {
+        margin-top: 24px;
+        padding: 20px;
+    }
+
+    .hero-quote-card p {
+        font-size: 14.5px;
+    }
+}
